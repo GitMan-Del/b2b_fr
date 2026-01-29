@@ -94,7 +94,7 @@ export default function CustomCursorContainer() {
           anticipatePin: 1,
           invalidateOnRefresh: true,
           refreshPriority: -1,
-          
+
           // markers: true, // Activează temporar pentru debug vizual
           snap: 1 / (numSlides - 1), // Snap simplu (opțional)
           // onUpdate: (self) => console.log("Progres:", self.progress), // Debug temporar
@@ -162,7 +162,7 @@ export default function CustomCursorContainer() {
           {/* Slide 3 */}
           <div className="relative w-screen h-full flex items-end p-20">
             <Image
-              src="/SEC.png"
+              src="/CES.png"
               alt=""
               fill
               className="object-cover"
