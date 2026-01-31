@@ -11,11 +11,11 @@ body {
 }
 
 h1 , h2  {
-  font-family: var-(--font-h);
+  font-family: var(--font-h);
   font-weight: 700 !important;
 }
 
 p , li , ul , a {
-  font-family: var-(--font-p);
-  font-weight: 500;
+  font-family: var(--font-p);
+  font-weight: 500  !important;
 }

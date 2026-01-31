@@ -23,10 +23,10 @@ export default function OverlayHero() {
 
   // TEST_#1
   return (
-    <div className="inset-0 absolute flex justify-center items-center z-0">
-      <div className="min-w-fit w-1/2 min-h-fit flex items-start absolute bottom-0 justify-around z-70">
+    <div className="inset-0 absolute flex justify-center items-center z-40">
+      <div className="min-w-fit w-1/2 min-h-fit flex items-start absolute -bottom-9 justify-around z-70">
         <div className="flex flex-row gap-2">
-          <div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white">
+          < div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white">
             {/* SVG */}
             <svg
               width="25"
@@ -55,7 +55,7 @@ export default function OverlayHero() {
                 </clipPath>
               </defs>
             </svg>
-          </div>
+          </div>  
           <div className="w-fit flex flex-col items-start gap-1">
             <p className="text-xl font-extrabold text-[#6D785A]">85%</p>
             <p>Clients récurrents</p>
@@ -112,7 +112,7 @@ export default function OverlayHero() {
           mask="url(#path-1-inside-1_1_823)"
         />
       </svg>
-      <p className="absolute left-1/2 bottom-35 -translate-x-1/2 text-[#6D785A] font-medium z-100 text-[16px]">
+      <p className="absolute left-1/2 bottom-20 -translate-x-1/2 text-[#6D785A] font-medium z-100 text-[16px]">
         SCROLL DOWN
       </p>
 
@@ -126,8 +126,8 @@ export default function OverlayHero() {
           <h1 className="max-w-245 text-[70px] text-left mt-6 text-[##151515] mb-30 leading-[140%]">
             <span className="muted">Votre Partenaire </span>
             <span className="text-[#6D785A] w-41.75 h-17.5 bg-[#D9D9D9]/30 border border-[#DEDEDE] -py-1 px-2 rounded-[10px] final">
-              B2B
-            </span>{" "}
+              B2B 
+            </span>{" "} <br/>
             Pour des Projets
           </h1>
         </div>

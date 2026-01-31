@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Badge from "./Badge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,17 +48,16 @@ export default function CustomCursorContainer() {
     gsap.to(cursor, { autoAlpha: 0, duration: 0.3 });
   };
 
-  // Folosim mouseenter/mouseleave pe secțiune (mai precis decât ScrollTrigger pentru hover)
-  sectionRef.current.addEventListener("mouseenter", onEnterSection);
-  sectionRef.current.addEventListener("mouseleave", onLeaveSection);
-
+  // Folosim mouseenter/mouseleave pe sectiune (mai precis decât ScrollTrigger pentru hover)
+   sectionRef.current.addEventListener("mouseenter", onEnterSection);
+   sectionRef.current.addEventListener("mouseleave", onLeaveSection);
+   
   // Pentru scroll: dacă scroll-ezi rapid și mouse-ul rămâne în zona veche → fallback cu ScrollTrigger
   ScrollTrigger.create({
     trigger: sectionRef.current,
-    start: "top bottom",          // începe când secțiunea intră în viewport
-    end: "bottom top",            // se termină când iese complet
+    start: "top center",          // începe când secțiunea intră în viewport
+    end: "bottom center",            // se termină când iese complet
     onEnter: onEnterSection,
-    onLeave: onLeaveSection,
     onEnterBack: onEnterSection,
     onLeaveBack: onLeaveSection,
   });
@@ -82,7 +82,7 @@ export default function CustomCursorContainer() {
       const numSlides = track.children.length;
 
       gsap.to(track, {
-        x: () => -(track.scrollWidth - window.innerWidth), // Calcul corect în px, nu xPercent!
+        x: () => -(track.scrollWidth - window.innerWidth), // Calcul corect în px
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -94,9 +94,8 @@ export default function CustomCursorContainer() {
           anticipatePin: 1,
           invalidateOnRefresh: true,
           refreshPriority: -1,
-
           // markers: true, // Activează temporar pentru debug vizual
-          snap: 1 / (numSlides - 1), // Snap simplu (opțional)
+          snap: 1 / (numSlides + 1), // Snap simplu 
           // onUpdate: (self) => console.log("Progres:", self.progress), // Debug temporar
         },
       });
@@ -108,13 +107,13 @@ export default function CustomCursorContainer() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full cursor-none overflow-hidden"
+      className="relative w-full cursor-none overflow-hidden pt-20"
     >
     <div
   ref={cursorRef}
   className="
-    pointer-events-none fixed top-0 left-0 z-9999
-    rounded-full border border-white/30 bg-white/10 backdrop-blur-md
+    pointer-events-none fixed top-0 left-0 z-20
+    rounded-[10px] border border-white/30 bg-white/10 backdrop-blur-md
     px-8 py-4 flex items-center justify-center min-w-45
   "
 >
@@ -123,14 +122,14 @@ export default function CustomCursorContainer() {
   </span>
 </div>
 
-      {/* Pinned Horizontal Section */}
+      {/* Horizontal Section */}
       <section
         ref={sectionRef}
-        className="relative h-screen w-[300vw]"
+        className="relative h-screen w-[300vw] z-10"
       >
         <div ref={trackRef} className="flex h-full overflow-hidden w-[300vw]">
           {/* Slide 1 */}
-          <div className="relative w-screen h-full flex items-end p-20">
+          <div className="relative w-screen h-full flex items-start justify-end flex-col p-20 ">
             <Image
               src="/RDB.png"
               alt=""
@@ -139,13 +138,14 @@ export default function CustomCursorContainer() {
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
-            <h3 className="relative z-10 text-9xl text-white uppercase font-medium">
+             <Badge mode="Blured" text="Bâtiment"/>
+            <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
               Rénovation de bâtiment
             </h3>
           </div>
 
           {/* Slide 2 */}
-          <div className="relative w-screen h-full flex items-end p-20">
+          <div className="relative w-screen h-full flex flex-col items-start justify-end p-20">
             <Image
               src="/SEC.png"
               alt="a"
@@ -154,13 +154,14 @@ export default function CustomCursorContainer() {
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
-            <h3 className="relative z-10 text-9xl text-white uppercase font-medium">
+             <Badge mode="Blured" text="Bureaux professionnels"/>
+            <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
               Rénovation de bureau
             </h3>
           </div>
 
           {/* Slide 3 */}
-          <div className="relative w-screen h-full flex items-end p-20">
+          <div className="relative w-screen h-full flex items-start justify-end flex-col p-20">
             <Image
               src="/CES.png"
               alt=""
@@ -169,15 +170,13 @@ export default function CustomCursorContainer() {
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
-            <h3 className="relative z-10 text-9xl text-white uppercase font-medium">
+            <Badge mode="Blured" text="Château"/>
+            <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
               Rénovation de château
             </h3>
           </div>
         </div>
-      </section>
-
-      {/* Dacă ai blank la final, acest div minim "mănâncă" spațiul extra fără să adauge vizibil */}
-      <div className="h-px bg-transparent" />
+      </section>     
     </div>
   );
 }
