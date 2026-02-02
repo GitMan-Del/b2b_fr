@@ -61,23 +61,21 @@ export default function Section2() {
         ].map((item) => (
           <div
             key={item.left}
-            className="absolute flex flex-col items-center"
+            className="absolute w-fit flex flex-col items-left -translate-x-1.25"
             style={{
               left: `${item.left}%`,
               bottom: item.bottom,
-              transform: "translateX(-50%)", // centrează pe poziție
             }}
           >
 
             {/* Punctul verde */}
             <div className="w-2.5 h-2.5 rounded-xs bg-[#6D785A] mb-2" />
             {/* Procentul mare – Sub punct */}
-              <p className="text-[40px] font-extrabold text-[#151515] mb-1">{item.value}<span className="text-[#6D785A]">%</span></p>
+              <p className="text-[40px] font-extrabold text-[#151515] mb-1 -translate-x-20.25">{item.value}<span className="text-[#6D785A]">%</span></p>
             {/* Textul descriptiv – jos, sub punct */}
             <p
-              className="text-[#5C5C5C] text-[13px] md:text-[14px] lg:text-[15px] font-medium text-center leading-tight"
-              style={{ maxWidth: "180px", width: "42vw", minWidth: "140px" }}
-            >
+              className="text-[#5C5C5C] text-[13px] md:text-[14px] lg:text-[15px] max-w-37.5 font-medium text-left leading-tight -translate-x-20.25"
+              >
               {item.text}
             </p>
           </div>
