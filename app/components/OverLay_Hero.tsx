@@ -138,7 +138,7 @@ export default function OverlayHero() {
             professionnels et maintenance technique pour syndics, foncières,
             investisseurs et entreprises à Paris.
           </p>
-          <Btncomp text="Discuter de votre projet" />
+          <Btncomp text="Discuter de votre project" />
           <p className="absolute bottom-0 right-0 font-medium text-[16px] text-[#151515]">
             48.8765° N, 2.3021° E
           </p>
