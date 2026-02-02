@@ -4,5 +4,5 @@ export default function Steps() {
             <div className="bg-linear-to-b from-0% to-50% from-[#000000] to-[#00000000]"></div>
             <h1 className="text-4xl mb-8">Steps Component</h1>
         </div>
-    );    
+    );
 }    

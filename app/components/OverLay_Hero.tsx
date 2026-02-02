@@ -26,7 +26,7 @@ export default function OverlayHero() {
     <div className="inset-0 absolute flex justify-center items-center z-40">
       <div className="min-w-fit w-1/2 min-h-fit flex items-start absolute -bottom-9 justify-around z-70">
         <div className="flex flex-row gap-2">
-          < div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white border-[3px] border-white/50">
+          < div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white border-[3px] border-white/90">
             {/* SVG */}
             <svg
               width="25"
@@ -34,6 +34,7 @@ export default function OverlayHero() {
               viewBox="0 0 25 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="rounded-xl"
             >
               <g clipPath="url(#clip0_178_1132)">
                 <path
@@ -62,7 +63,7 @@ export default function OverlayHero() {
           </div>  
         </div>
         <div className="flex flex-row-reverse gap-2">
-          <div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[100deg] from-white/50 to-white border-[3px] border-white/50">
+          <div className="w-16 h-16 rounded-2xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[100deg] from-white/50 to-white border-[3px] border-white/90">
             {/* SVG */}
             <svg
               width="25"
