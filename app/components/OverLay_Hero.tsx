@@ -26,7 +26,7 @@ export default function OverlayHero() {
     <div className="inset-0 absolute flex justify-center items-center z-40">
       <div className="min-w-fit w-1/2 min-h-fit flex items-start absolute -bottom-9 justify-around z-70">
         <div className="flex flex-row gap-2">
-          < div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white">
+          < div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white border-[3px] border-white/50">
             {/* SVG */}
             <svg
               width="25"
@@ -58,11 +58,11 @@ export default function OverlayHero() {
           </div>  
           <div className="w-fit flex flex-col items-start gap-1">
             <p className="text-xl font-extrabold text-[#6D785A]">85%</p>
-            <p>Clients récurrents</p>
-          </div>
+            <p className="font-medium">Clients récurrents</p>
+          </div>  
         </div>
         <div className="flex flex-row-reverse gap-2">
-          <div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[100deg] from-white/50 to-white">
+          <div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[100deg] from-white/50 to-white border-[3px] border-white/50">
             {/* SVG */}
             <svg
               width="25"
@@ -86,7 +86,7 @@ export default function OverlayHero() {
           </div>
           <div className="w-fit flex flex-col items-end gap-1">
             <p className="text-xl font-extrabold text-[#6D785A]">98%</p>
-            <p>Respect des délais</p>
+            <p className="font-medium">Respect des délais</p>
           </div>
         </div>
       </div>
