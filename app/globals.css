@@ -15,7 +15,7 @@ h1 , h2  {
   font-weight: 700 !important;
 }
 
-p , li , ul , a {
+p , li , ul , a , button {
   font-family: var(--font-p);
   font-weight: 500  !important;
 }

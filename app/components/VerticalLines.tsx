@@ -8,6 +8,7 @@ export default function VerticalLines() {
             left: `${left}%`,
             borderWidth: left === 30 || left === 70 ? "1px" : "3px",
             bottom: 0,
+            transform: left === 50 || left === 10 || left === 90 ? "translateX(-50%)" : "none",
             top: left === 30 || left === 50 || left === 70 ? "1.40%" : "0",
           }}
           className="absolute border-l border-dashed border-[#DEDEDE] opacity-40"
