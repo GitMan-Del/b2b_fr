@@ -112,7 +112,7 @@ export default function OverlayHero() {
           mask="url(#path-1-inside-1_1_823)"
         />
       </svg>
-      <p className="absolute left-1/2 bottom-20 -translate-x-1/2 text-[#6D785A] font-medium z-100 text-[16px]">
+      <p className="absolute left-1/2 bottom-22 -translate-x-1/2 text-[#6D785A] font-medium z-100 text-[16px]">
         SCROLL DOWN
       </p>
 
@@ -133,7 +133,7 @@ export default function OverlayHero() {
         </div>
         <div className="flex-1 relative flex justify-center flex-col items-start p-10 text-left mt-20 text-[##5C5C5C]">
           <p className="text-lg text-[##1C1C1C]">{"// SINCE - 2025 //"}</p>
-          <p className="mt-5.5 text-xl max-w-109 text-[#5C5C5C]">
+          <p className="mt-5.5 text-xl font-medium max-w-109 text-[#5C5C5C]">
             Nous réalisons des rénovations complètes, aménagements
             professionnels et maintenance technique pour syndics, foncières,
             investisseurs et entreprises à Paris.
