@@ -9,7 +9,7 @@ export default function Badge({
     mode === "Light"
       ? "bg-[#FFFFFF] border border-[#D1D1D1] text-black"
       : mode === "Dark"
-        ? "bg-linear-to-l bg-from-[#151515] backdrop-blur-[10px] to-white/10 border border-[#444444] text-white"
+        ? "bg-linear-to-l bg-from-[#151515] backdrop-blur-[10px] to-black/10 border-2 border-[#4444443a] text-white"
         : mode === "Blured"
           ? "bg-white/20  backdrop-blur-[10px] border-2 border-white/10  text-white"
           : mode === "Light";

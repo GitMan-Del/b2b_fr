@@ -102,7 +102,7 @@ export default function VerticalLines({
         })}
 
 
-         <div className="relative w-full h-full">
+         <div className="relative w-full h-full z-30">
           {steps.map((step, index) => {
             const isEven = index % 2 === 0;
             // Poziții verticale progresive pornind de la ~35–38%

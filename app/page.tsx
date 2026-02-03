@@ -19,13 +19,9 @@ export default function Home() {
         <main className="w-[97%] mt-4 mx-auto h-screen relative flex flex-col items-center justify-center text-center">
           <OverlayHero />
         </main>
-
         <Section2 />
-
         <CustomCursorContainer />
-        <section className="w-full h-screen">
           <Steps />
-        </section>
       </div>
     </>
   );

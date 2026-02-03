@@ -11,7 +11,7 @@ export default function Steps() {
       <div className="z-20 flex flex-col items-start justify-center gap-3.25 ">
         <Badge text="Projets d'envergure" mode="Dark" />
         <h5 className="max-w-245 text-[70px] font-bold  text-left text-white">
-          Un Processus <span className="text-[#6D785A]">Structuré</span> Pour
+          Un Processus <span className="text-[#6D785A]">Structuré</span> <br/> Pour
           vos Projets
         </h5>
           </div>
