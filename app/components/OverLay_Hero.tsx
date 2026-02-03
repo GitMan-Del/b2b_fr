@@ -126,7 +126,7 @@ export default function OverlayHero() {
           <Badge text={"Votre expert B2B"} mode={"Light"} />
           <h1 className="max-w-245 text-[70px] text-left mt-6 text-[##151515] mb-30 leading-[140%]">
             <span className="muted">Votre Partenaire </span>
-            <span className="text-[#6D785A] w-41.75 h-17.5 bg-[#D9D9D9]/30 border border-[#DEDEDE] -py-1 px-2 rounded-[10px] final">
+            <span className="text-[#6D785A] w-41.75 h-17.5 bg-[#D9D9D9]/30 border border-[#DEDEDE] -py-1 px-2 rounded-[10px]">
               B2B 
             </span>{" "} <br/>
             Pour des Projets

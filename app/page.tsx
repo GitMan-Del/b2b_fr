@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <div className="relative min-h-screen flex flex-col items-center justify-center p-0">
         <Navbar />
-        <VerticalLines />
+        <VerticalLines variant="Var1" />
         <main className="w-[97%] mt-4 mx-auto h-screen relative flex flex-col items-center justify-center text-center">
           <OverlayHero />
         </main>
