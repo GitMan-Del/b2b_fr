@@ -10,6 +10,7 @@ import Section2 from "./Section2";
 import Steps from "./components/Steps";
 import Section3 from "./Section3";
 import CustomCursorContainer2 from "./components/cursor2";
+import RequestQuoteForm from "./components/Form";
 export default function Home() {
   useSmoothScroll(); // Lenis
 
@@ -28,6 +29,7 @@ export default function Home() {
 
        <CustomCursorContainer2 />
         
+        <RequestQuoteForm />
       </div>  
     </>
   );
