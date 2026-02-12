@@ -1,5 +1,5 @@
-import Badge from "./components/Badge";
-import Btn from "./components/btn";
+import Badge from "./Badge";
+import Btn from "./btn";
 
 export default function Section2() {
   const positions = [0]; // pornim de la 0

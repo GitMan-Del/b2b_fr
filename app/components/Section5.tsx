@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Badge from "./components/Badge";
-import BtnComp from "./components/btn";
+import Badge from "./Badge";
+import BtnComp from "./btn";
 
-export default function Section3() {
+export default function Section5() {
   const [size, setSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -119,12 +119,6 @@ export default function Section3() {
           48.8765° N, 2.3021° E
           </p>
 
-        <Badge text="Nos Expertises B2B" mode="Light" />
-        <h6 className="font-bold text-[70px] text-center mt-6 text-[#151515] mb-10 leading-[140%]">
-          Des <span className="text-[#6D785A]">Solutions Complètes</span> Pour <br /> Vos Projets
-          D&apos;envergure
-        </h6>
-        <p className="text-center max-w-125 text-[#5C5C5C]">Nous ne faisons pas du dépannage. Nous construisons des partenariats durables basés sur la capacité, la structure et la fiabilité.</p>
         <div className="absolute bottom-10">
         <BtnComp />
        </div>
