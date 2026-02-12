@@ -124,52 +124,87 @@ export default function CustomCursorContainer() {
 
       {/* Horizontal Section */}
       <section ref={sectionRef} className="relative h-screen w-[300vw] z-10">
-        <div ref={trackRef} className="flex h-full overflow-hidden w-[300vw]">
+        <div ref={trackRef} className="flex h-full overflow-hidden w-[400vw]">
           {/* Slide 1 */}
           <div className="relative w-screen h-full flex items-start justify-end flex-col p-20 ">
             <Image
-              src="/RDB.png"
+              src="/FFL.png"
               alt=""
               fill
               className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
-            <Badge mode="Blured" text="Bâtiment" />
+            <div className="flex flex-row gap-4.5">
+              <Badge mode="Blured" text="AG votées" />
+              <Badge mode="Blured" text="Conformité totale" />
+              <Badge mode="Blured" text="Planning précis" />
+              <Badge mode="Blured" text="Communication résidents" />
+            </div>
             <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
-              Rénovation de bâtiment
+              Syndics & Gestionnaires
+            </h3>
+          </div>
+          {/* Slide 1 */}
+          <div className="relative w-screen h-full flex items-start justify-end flex-col p-20 ">
+            <Image
+              src="/VGH.png"
+              alt=""
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="flex flex-row gap-4.5">
+              <Badge mode="Blured" text="ROI maximal" />
+              <Badge mode="Blured" text="Délais garantis" />
+              <Badge mode="Blured" text="Qualité supérieure" />
+              <Badge mode="Blured" text="Livraison clé en main" />
+            </div>
+            <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
+              Investisseurs & Foncières
             </h3>
           </div>
 
           {/* Slide 2 */}
           <div className="relative w-screen h-full flex flex-col items-start justify-end p-20">
             <Image
-              src="/SEC.png"
+              src="/HJG.png"
               alt="a"
               fill
               className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
-            <Badge mode="Blured" text="Bureaux professionnels" />
+            <div className="flex flex-row gap-4.5">
+              <Badge mode="Blured" text="Travaux sans arrêt activité" />
+              <Badge mode="Blured" text="Espaces fonctionnel" />
+              <Badge mode="Blured" text="Infrastructure tech" />
+              <Badge mode="Blured" text="Design corporate" />
+            </div>
             <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
-              Rénovation de bureau
+              PME & Entreprises
             </h3>
           </div>
 
           {/* Slide 3 */}
           <div className="relative w-screen h-full flex items-start justify-end flex-col p-20">
             <Image
-              src="/CES.png"
+              src="/PEX.png"
               alt=""
               fill
               className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
-            <Badge mode="Blured" text="Château" />
+            <div className="flex flex-row gap-4.5">
+              <Badge mode="Blured" text="Charte respectée" />
+              <Badge mode="Blured" text="Ouverture rapide" />
+              <Badge mode="Blured" text="Agencement pro" />
+              <Badge mode="Blured" text="Normes ERP" />
+            </div>
             <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
-              Rénovation de château
+              Enseignes & Franchises
             </h3>
           </div>
         </div>
