@@ -6,7 +6,6 @@ const MIN_LOADING_MS = 1200;
 
 export default function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const start = Date.now();
@@ -32,14 +31,9 @@ export default function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
     if (isVisible) {
       document.body.style.overflow = "hidden";
-    }
-    if (!isVisible && isMounted) {
+    } else {
       const t = setTimeout(() => {
         document.body.style.overflow = "";
       }, 600);
@@ -48,7 +42,7 @@ export default function LoadingScreen() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isVisible, isMounted]);
+  }, [isVisible]);
 
   return (
     <div

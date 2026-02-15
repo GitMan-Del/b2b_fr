@@ -1,7 +1,7 @@
 export default function BtnComp({ text }: { text?: string }) {
   return (
     <>
-      <button className="flex rounded-[5px] rounded-br-[20px] py-2.25 border-2 border-[#4444443a] pr-2 pl-7 gap-6.25 font-medium flex-row bg-[#151515] text-white text-[20px] hover:cursor-pointer hover:rotate-1 transition duration-300 ease-in-out items-center mt-7.75">
+      <button className="flex rounded-[5px] rounded-br-[20px] py-2.25 border-2 border-[#4444443a] pr-2 pl-7 gap-6.25 font-medium flex-row bg-[#151515] text-white text-[20px] hover:cursor-pointer hover:rotate-1 transition duration-300 ease-in-out items-center mt-7.75 max-lg:min-h-[48px] max-lg:text-base max-lg:px-5 max-lg:py-3 max-lg:mt-5">
         {text ? text : "Discuter de votre project"}
         <div className="p-5 bg-[rgb(109,120,90)]  rounded inline-flex rounded-br-[15px] ">
           <svg
