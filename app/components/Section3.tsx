@@ -1,9 +1,133 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import Badge from "./Badge";
 import BtnComp from "./btn";
 
+const CARD_WIDTH = 389;
+const CARD_GAP = 56;
+
+const CARDS = [
+  {
+    titlePrefix: "Rénovation",
+    titleSuffix: "de Blocs et Immeubles",
+    services: [
+      "Rénovation parties communes",
+      "Ravalement de façade",
+      "Réseaux & mise aux normes",
+      "Travaux votés en AG",
+    ],
+    clients: "Syndics, Foncières, Gestionnaires",
+    budget: "50 000 € – 500 000 €+",
+  },
+  {
+    titlePrefix: "Rénovation",
+    titleSuffix: "Locaux Commerciaux",
+    services: [
+      "Boutiques & restaurants",
+      "Cabinets professionnels",
+      "Agencement sur mesure",
+      "Livraison rapide",
+    ],
+    clients: "Enseignes, Franchises, Investisseurs",
+    budget: "30 000 € – 300 000 €+",
+  },
+  {
+    titlePrefix: "Travaux",
+    titleSuffix: "Tous Corps d'État",
+    services: [
+      "Aménagement bureaux",
+      "Cloisonnement & acoustique",
+      "Électricité & data",
+      "Finitions premium",
+    ],
+    clients: "PME, Groupes, Startups, Cabinets",
+    budget: "40 000 € – 400 000 €+",
+  },
+  {
+    titlePrefix: "Maintenance",
+    titleSuffix: "Technique Multi-Sites",
+    services: [
+      "Maintenance préventive",
+      "Interventions urgentes 24/7",
+      "Contrats cadres",
+      "Suivi multi-sites",
+    ],
+    clients: "Agences, Syndics, Chaînes, Groupes",
+    budget: "Contrats annuels récurrents",
+  },
+  {
+    titlePrefix: "Investisseurs &",
+    titleSuffix: "Marchands de Biens",
+    services: [
+      "Rénovation globale express",
+      "Optimisation budget",
+      "Valorisation patrimoine",
+      "Délais garantis",
+    ],
+    clients: "Investisseurs, Marchands, Foncières",
+    budget: "60 000 € – 600 000 €+",
+  },
+];
+
+function Card({
+  titlePrefix,
+  titleSuffix,
+  services,
+  clients,
+  budget,
+  isActive,
+}: {
+  titlePrefix: string;
+  titleSuffix: string;
+  services: string[];
+  clients: string;
+  budget: string;
+  isActive: boolean;
+}) {
+  return (
+    <div className="shrink-0 w-[389px] max-w-[calc(100vw-2rem)] path-s3  rounded-[18px] border border-[#e5e5e5] bg-[#fafafa] shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden flex flex-col">
+      {/* Header with tab-like cutout */}
+      <div className="relative pt-6 pb-2 px-6">
+        
+        <div className="relative">
+          <p className="text-[25px] leading-tight font-bold text-[#6D785A] pl-20">
+              {titlePrefix} {" "} 
+            <span className=" text-[#151515]">{titleSuffix}</span>
+          </p>
+        </div>
+      </div>
+      <div className="px-6 pb-6 flex flex-col gap-4 flex-1">
+        <ul className="list-none space-y-2">
+          {services.map((s, i) => (
+            <li key={i} className="flex items-center gap-2 text-[#5C5C5C]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#5C5C5C] shrink-0" />
+              <span>{s}</span>
+            </li>
+          ))}
+        </ul>
+        <hr className="border-t border-[#DEDEDE]" />
+        <div>
+          <p className="text-[14px] uppercase tracking-wide text-[#BFBFBF] mb-1">
+            CLIENTS TYPIQUES
+          </p>
+          <p className="font-normal text-[#5C5C5C] txet-[16px]">{clients}</p>
+        </div>
+       
+        <div>
+          <p className="text-xs uppercase tracking-wide text-[#BFBFBF] mb-1">
+            BUDGET MOYEN
+          </p>
+          <p className="font-bold text-[##6D785A] text-[16px]">{budget}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Section3() {
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const updateSize = () => {
@@ -12,40 +136,25 @@ export default function Section3() {
         height: window.innerHeight,
       });
     };
-
     updateSize();
     window.addEventListener("resize", updateSize);
-
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
+  const maxIndex = Math.max(0, CARDS.length - 3); // 3 cards visible
+  const goPrev = () => {
+    setCurrentIndex((i) => (i <= 0 ? maxIndex : i - 1));
+  };
+  const goNext = () => {
+    setCurrentIndex((i) => (i >= maxIndex ? 0 : i + 1));
+  };
+
+  const translateX = -currentIndex * (CARD_WIDTH + CARD_GAP);
+
   return (
-    <div className="flex justify-center items-center z-40 py-10 relative">
-      <svg
-        width={size.width}
-        height={size.height}
-        viewBox="0 0 1378 670"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="pointer-events-none"
-      >
-        <mask id="path-1-inside-1_1_823" fill="white">
-          <path d="M304.942 0C321.561 0 336.888 8.96388 345.035 23.4482L352.701 37.0762C360.849 51.5605 376.175 60.5244 392.794 60.5244H984.577C1001.2 60.5244 1016.52 51.5605 1024.67 37.0762L1032.34 23.4482C1040.48 8.96388 1055.81 0 1072.43 0H1347.37C1349.18 0 1350.96 0.160841 1352.68 0.46875C1353.17 0.556736 1353.66 0.65684 1354.15 0.768555C1355.6 1.10361 1357.01 1.54387 1358.37 2.08105C1358.83 2.26012 1359.27 2.45012 1359.72 2.65039C1360.38 2.95087 1361.03 3.27465 1361.67 3.62109C1362.1 3.8519 1362.51 4.09235 1362.93 4.34277C1364.99 5.59562 1366.89 7.09041 1368.58 8.78711C1369.77 9.97473 1370.86 11.2614 1371.84 12.6338C1372.39 13.418 1372.91 14.2298 1373.4 15.0674C1373.64 15.4862 1373.87 15.9115 1374.09 16.3428C1376.19 20.4392 1377.37 25.0814 1377.37 30V639.053C1377.37 655.621 1363.94 669.053 1347.37 669.053H1072.43C1055.81 669.053 1040.48 660.089 1032.34 645.604L1024.67 631.977C1016.52 617.492 1001.2 608.528 984.577 608.528H392.794C376.175 608.528 360.849 617.492 352.701 631.977L345.035 645.604C336.888 660.089 321.561 669.053 304.942 669.053H30C24.8223 669.053 19.951 667.741 15.7002 665.432C15.2752 665.201 14.8566 664.959 14.4443 664.709C12.7949 663.707 11.2498 662.55 9.8291 661.259C9.47393 660.936 9.12641 660.605 8.78711 660.266C6.07252 657.551 3.87554 654.319 2.35742 650.729C2.16767 650.281 1.98854 649.827 1.82031 649.367C1.23156 647.759 0.776627 646.087 0.46875 644.363C0.380735 643.871 0.304857 643.374 0.241211 642.873C0.0821907 641.622 1.79757e-05 640.347 0 639.053V30C2.78527e-06 29.7411 0.00324519 29.4829 0.00976562 29.2256C0.0228085 28.7109 0.0492325 28.1994 0.0878906 27.6914C0.725634 19.3119 4.80543 11.8945 10.917 6.85059C11.2875 6.54481 11.6657 6.24798 12.0508 5.95996C12.8209 5.384 13.6195 4.84394 14.4443 4.34277C14.8565 4.09235 15.2753 3.8519 15.7002 3.62109C19.951 1.31182 24.8223 0 30 0H304.942Z" />
-        </mask>
-        <path
-          d="M304.942 0C321.561 0 336.888 8.96388 345.035 23.4482L352.701 37.0762C360.849 51.5605 376.175 60.5244 392.794 60.5244H984.577C1001.2 60.5244 1016.52 51.5605 1024.67 37.0762L1032.34 23.4482C1040.48 8.96388 1055.81 0 1072.43 0H1347.37C1349.18 0 1350.96 0.160841 1352.68 0.46875C1353.17 0.556736 1353.66 0.65684 1354.15 0.768555C1355.6 1.10361 1357.01 1.54387 1358.37 2.08105C1358.83 2.26012 1359.27 2.45012 1359.72 2.65039C1360.38 2.95087 1361.03 3.27465 1361.67 3.62109C1362.1 3.8519 1362.51 4.09235 1362.93 4.34277C1364.99 5.59562 1366.89 7.09041 1368.58 8.78711C1369.77 9.97473 1370.86 11.2614 1371.84 12.6338C1372.39 13.418 1372.91 14.2298 1373.4 15.0674C1373.64 15.4862 1373.87 15.9115 1374.09 16.3428C1376.19 20.4392 1377.37 25.0814 1377.37 30V639.053C1377.37 655.621 1363.94 669.053 1347.37 669.053H1072.43C1055.81 669.053 1040.48 660.089 1032.34 645.604L1024.67 631.977C1016.52 617.492 1001.2 608.528 984.577 608.528H392.794C376.175 608.528 360.849 617.492 352.701 631.977L345.035 645.604C336.888 660.089 321.561 669.053 304.942 669.053H30C24.8223 669.053 19.951 667.741 15.7002 665.432C15.2752 665.201 14.8566 664.959 14.4443 664.709C12.7949 663.707 11.2498 662.55 9.8291 661.259C9.47393 660.936 9.12641 660.605 8.78711 660.266C6.07252 657.551 3.87554 654.319 2.35742 650.729C2.16767 650.281 1.98854 649.827 1.82031 649.367C1.23156 647.759 0.776627 646.087 0.46875 644.363C0.380735 643.871 0.304857 643.374 0.241211 642.873C0.0821907 641.622 1.79757e-05 640.347 0 639.053V30C2.78527e-06 29.7411 0.00324519 29.4829 0.00976562 29.2256C0.0228085 28.7109 0.0492325 28.1994 0.0878906 27.6914C0.725634 19.3119 4.80543 11.8945 10.917 6.85059C11.2875 6.54481 11.6657 6.24798 12.0508 5.95996C12.8209 5.384 13.6195 4.84394 14.4443 4.34277C14.8565 4.09235 15.2753 3.8519 15.7002 3.62109C19.951 1.31182 24.8223 0 30 0H304.942Z"
-          fill="#D9D9D9"
-          fillOpacity="0.18"
-        />
-        <path
-          d="M345.035 23.4482L344.164 23.9385V23.9385L345.035 23.4482ZM352.701 37.0762L353.573 36.5859V36.5859L352.701 37.0762ZM1024.67 37.0762L1023.8 36.5859V36.5859L1024.67 37.0762ZM1032.34 23.4482L1033.21 23.9385V23.9385L1032.34 23.4482ZM1352.68 0.46875L1352.51 1.45317V1.45317L1352.68 0.46875ZM1354.15 0.768555L1354.37 -0.205817V-0.205818L1354.15 0.768555ZM1358.37 2.08105L1358 3.01134V3.01134L1358.37 2.08105ZM1359.72 2.65039L1360.13 1.7392V1.73919L1359.72 2.65039ZM1361.67 3.62109L1361.19 4.4998L1361.19 4.4998L1361.67 3.62109ZM1362.93 4.34277L1363.45 3.48816V3.48816L1362.93 4.34277ZM1368.58 8.78711L1367.88 9.49421V9.49421L1368.58 8.78711ZM1371.84 12.6338L1372.65 12.0543V12.0543L1371.84 12.6338ZM1373.4 15.0674L1372.53 15.5659V15.5659L1373.4 15.0674ZM1374.09 16.3428L1374.98 15.8869V15.8869L1374.09 16.3428ZM1377.37 30H1378.37V30L1377.37 30ZM1377.37 639.053H1378.37V639.053H1377.37ZM1072.43 669.053V670.053V670.053V669.053ZM1032.34 645.604L1033.21 645.114V645.114L1032.34 645.604ZM1024.67 631.977L1023.8 632.467V632.467L1024.67 631.977ZM984.577 608.528V607.528V607.528V608.528ZM392.794 608.528V609.528V609.528V608.528ZM352.701 631.977L353.573 632.467V632.467L352.701 631.977ZM345.035 645.604L344.164 645.114V645.114L345.035 645.604ZM304.942 669.053V668.053V668.053V669.053ZM15.7002 665.432L15.2228 666.31H15.2228L15.7002 665.432ZM14.4443 664.709L14.9636 663.854H14.9636L14.4443 664.709ZM9.8291 661.259L9.15651 661.999H9.15651L9.8291 661.259ZM8.78711 660.266L9.49422 659.559H9.49422L8.78711 660.266ZM2.35742 650.729L3.27843 650.34H3.27843L2.35742 650.729ZM1.82031 649.367L0.881277 649.711H0.881277L1.82031 649.367ZM0.46875 644.363L1.45317 644.187H1.45317L0.46875 644.363ZM0.241211 642.873L-0.750807 642.999H-0.750807L0.241211 642.873ZM0 639.053H-1V639.053H0ZM0 30L-1 30V30H0ZM0.00976562 29.2256L1.00944 29.2509L1.00944 29.2509L0.00976562 29.2256ZM0.0878906 27.6914L-0.909226 27.6155L-0.909226 27.6155L0.0878906 27.6914ZM10.917 6.85059L10.2805 6.07933V6.07933L10.917 6.85059ZM12.0508 5.95996L12.6497 6.76078L12.6497 6.76078L12.0508 5.95996ZM14.4443 4.34277L13.9251 3.48816L13.9251 3.48816L14.4443 4.34277ZM15.7002 3.62109L16.1776 4.4998H16.1776L15.7002 3.62109ZM304.942 0V1C321.2 1 336.193 9.76902 344.164 23.9385L345.035 23.4482L345.907 22.958C337.582 8.15875 321.922 -1 304.942 -1V0ZM345.035 23.4482L344.164 23.9385L351.83 37.5664L352.701 37.0762L353.573 36.5859L345.907 22.958L345.035 23.4482ZM352.701 37.0762L351.83 37.5664C360.154 52.3657 375.814 61.5244 392.794 61.5244V60.5244V59.5244C376.537 59.5244 361.543 50.7554 353.573 36.5859L352.701 37.0762ZM392.794 60.5244V61.5244H984.577V60.5244V59.5244H392.794V60.5244ZM984.577 60.5244V61.5244C1001.56 61.5244 1017.22 52.3657 1025.54 37.5664L1024.67 37.0762L1023.8 36.5859C1015.83 50.7554 1000.83 59.5244 984.577 59.5244V60.5244ZM1024.67 37.0762L1025.54 37.5664L1033.21 23.9385L1032.34 23.4482L1031.46 22.958L1023.8 36.5859L1024.67 37.0762ZM1032.34 23.4482L1033.21 23.9385C1041.18 9.76902 1056.17 1 1072.43 1V0V-1C1055.45 -1 1039.79 8.15875 1031.46 22.958L1032.34 23.4482ZM1072.43 0V1H1347.37V0V-1H1072.43V0ZM1347.37 0V1C1349.12 1 1350.84 1.15557 1352.51 1.45317L1352.68 0.46875L1352.86 -0.515667C1351.08 -0.833887 1349.24 -1 1347.37 -1V0ZM1352.68 0.46875L1352.51 1.45317C1352.98 1.53819 1353.45 1.63493 1353.92 1.74293L1354.15 0.768555L1354.37 -0.205818C1353.87 -0.321252 1353.37 -0.424713 1352.86 -0.515668L1352.68 0.46875ZM1354.15 0.768555L1353.92 1.74293C1355.32 2.06674 1356.69 2.49221 1358 3.01134L1358.37 2.08105L1358.74 1.15077C1357.33 0.595535 1355.87 0.140478 1354.37 -0.205817L1354.15 0.768555ZM1358.37 2.08105L1358 3.01134C1358.44 3.18431 1358.88 3.36792 1359.3 3.56159L1359.72 2.65039L1360.13 1.73919C1359.67 1.53231 1359.21 1.33594 1358.74 1.15077L1358.37 2.08105ZM1359.72 2.65039L1359.3 3.56159C1359.95 3.85209 1360.58 4.16503 1361.19 4.4998L1361.67 3.62109L1362.15 2.74239C1361.49 2.38426 1360.82 2.04966 1360.13 1.7392L1359.72 2.65039ZM1361.67 3.62109L1361.19 4.4998C1361.6 4.72314 1362.01 4.95558 1362.41 5.19739L1362.93 4.34277L1363.45 3.48816C1363.02 3.22913 1362.59 2.98066 1362.15 2.74238L1361.67 3.62109ZM1362.93 4.34277L1362.41 5.19739C1364.4 6.40842 1366.24 7.85357 1367.88 9.49421L1368.58 8.78711L1369.29 8.08001C1367.54 6.32726 1365.58 4.78282 1363.45 3.48816L1362.93 4.34277ZM1368.58 8.78711L1367.88 9.49421C1369.03 10.6425 1370.08 11.8865 1371.02 13.2133L1371.84 12.6338L1372.65 12.0543C1371.64 10.6363 1370.52 9.30696 1369.29 8.08L1368.58 8.78711ZM1371.84 12.6338L1371.02 13.2133C1371.56 13.9717 1372.06 14.7565 1372.53 15.5659L1373.4 15.0674L1374.26 14.5689C1373.77 13.7031 1373.23 12.8642 1372.65 12.0543L1371.84 12.6338ZM1373.4 15.0674L1372.53 15.5659C1372.76 15.9703 1372.99 16.3814 1373.2 16.7986L1374.09 16.3428L1374.98 15.8869C1374.75 15.4417 1374.51 15.0021 1374.26 14.5689L1373.4 15.0674ZM1374.09 16.3428L1373.2 16.7986C1375.23 20.7573 1376.37 25.2436 1376.37 30L1377.37 30L1378.37 30C1378.37 24.9192 1377.15 20.1211 1374.98 15.8869L1374.09 16.3428ZM1377.37 30H1376.37V639.053H1377.37H1378.37V30H1377.37ZM1377.37 639.053H1376.37C1376.37 655.069 1363.39 668.053 1347.37 668.053V669.053V670.053C1364.49 670.053 1378.37 656.173 1378.37 639.053H1377.37ZM1347.37 669.053V668.053H1072.43V669.053V670.053H1347.37V669.053ZM1072.43 669.053V668.053C1056.17 668.053 1041.18 659.284 1033.21 645.114L1032.34 645.604L1031.46 646.095C1039.79 660.894 1055.45 670.053 1072.43 670.053V669.053ZM1032.34 645.604L1033.21 645.114L1025.54 631.486L1024.67 631.977L1023.8 632.467L1031.46 646.095L1032.34 645.604ZM1024.67 631.977L1025.54 631.486C1017.22 616.687 1001.56 607.528 984.577 607.528V608.528V609.528C1000.83 609.528 1015.83 618.297 1023.8 632.467L1024.67 631.977ZM984.577 608.528V607.528H392.794V608.528V609.528H984.577V608.528ZM392.794 608.528V607.528C375.814 607.528 360.154 616.687 351.83 631.486L352.701 631.977L353.573 632.467C361.543 618.297 376.537 609.528 392.794 609.528V608.528ZM352.701 631.977L351.83 631.486L344.164 645.114L345.035 645.604L345.907 646.095L353.573 632.467L352.701 631.977ZM345.035 645.604L344.164 645.114C336.193 659.284 321.2 668.053 304.942 668.053V669.053V670.053C321.922 670.053 337.582 660.894 345.907 646.095L345.035 645.604ZM304.942 669.053V668.053H30V669.053V670.053H304.942V669.053ZM30 669.053V668.053C24.9932 668.053 20.2855 666.785 16.1775 664.553L15.7002 665.432L15.2228 666.31C19.6165 668.697 24.6514 670.053 30 670.053V669.053ZM15.7002 665.432L16.1776 664.553C15.7673 664.33 15.3627 664.097 14.9636 663.854L14.4443 664.709L13.9251 665.564C14.3505 665.822 14.7831 666.071 15.2228 666.31L15.7002 665.432ZM14.4443 664.709L14.9636 663.854C13.3691 662.886 11.8753 661.767 10.5017 660.519L9.8291 661.259L9.15651 661.999C10.6243 663.333 12.2207 664.528 13.9251 665.564L14.4443 664.709ZM9.8291 661.259L10.5017 660.519C10.1581 660.206 9.82208 659.886 9.49422 659.559L8.78711 660.266L8.08 660.973C8.43074 661.323 8.78979 661.665 9.15651 661.999L9.8291 661.259ZM8.78711 660.266L9.49422 659.559C6.86935 656.934 4.74562 653.809 3.27843 650.34L2.35742 650.729L1.43641 651.119C3.00545 654.829 5.27569 658.168 8.08 660.973L8.78711 660.266ZM2.35742 650.729L3.27843 650.34C3.09505 649.906 2.92194 649.467 2.75935 649.023L1.82031 649.367L0.881277 649.711C1.05515 650.186 1.24029 650.655 1.43641 651.119L2.35742 650.729ZM1.82031 649.367L2.75935 649.023C2.1904 647.469 1.75074 645.853 1.45317 644.187L0.46875 644.363L-0.515666 644.539C-0.197483 646.32 0.272718 648.049 0.881277 649.711L1.82031 649.367ZM0.46875 644.363L1.45317 644.187C1.36812 643.711 1.29477 643.231 1.23323 642.747L0.241211 642.873L-0.750807 642.999C-0.685059 643.516 -0.606651 644.03 -0.515665 644.539L0.46875 644.363ZM0.241211 642.873L1.23323 642.747C1.0795 641.538 1.00002 640.305 1 639.053H0H-1C-0.999981 640.389 -0.915116 641.706 -0.750807 642.999L0.241211 642.873ZM0 639.053H1V30H0H-1V639.053H0ZM0 30L1 30C1 29.7495 1.00314 29.4997 1.00944 29.2509L0.00976562 29.2256L-0.989913 29.2003C-0.99665 29.4661 -0.999997 29.7328 -1 30L0 30ZM0.00976562 29.2256L1.00944 29.2509C1.02205 28.7536 1.04759 28.259 1.08501 27.7673L0.0878906 27.6914L-0.909226 27.6155C-0.949122 28.1398 -0.976429 28.6681 -0.989913 29.2003L0.00976562 29.2256ZM0.0878906 27.6914L1.08501 27.7673C1.70134 19.6691 5.64371 12.4992 11.5535 7.62185L10.917 6.85059L10.2805 6.07933C3.96714 11.2897 -0.250071 18.9546 -0.909226 27.6155L0.0878906 27.6914ZM10.917 6.85059L11.5535 7.62185C11.9114 7.32646 12.277 7.03948 12.6497 6.76078L12.0508 5.95996L11.4519 5.15914C11.0543 5.45648 10.6636 5.76315 10.2805 6.07933L10.917 6.85059ZM12.0508 5.95996L12.6497 6.76078C13.3944 6.20382 14.1664 5.68175 14.9636 5.19739L14.4443 4.34277L13.9251 3.48816C13.0726 4.00614 12.2474 4.56417 11.4519 5.15914L12.0508 5.95996ZM14.4443 4.34277L14.9636 5.19739C15.3616 4.95558 15.7664 4.72314 16.1776 4.4998L15.7002 3.62109L15.2228 2.74239C14.7842 2.98066 14.3514 3.22912 13.9251 3.48816L14.4443 4.34277ZM15.7002 3.62109L16.1776 4.4998C20.2856 2.26813 24.9931 1 30 1V0V-1C24.6514 -1 19.6165 0.355513 15.2228 2.74239L15.7002 3.62109ZM30 0V1H304.942V0V-1H30V0Z"
-          fill="#DEDEDE"
-          mask="url(#path-1-inside-1_1_823)"
-        />
-      </svg>
+    <div className="flex justify-center items-center z-40 py-10 relative overflow-hidden w-full min-h-screen h-[200vh]">
       <div className="flex flex-row gap-2 absolute top-5 right-1/2 -translate-x-1/2 font-medium text-[16px] text-[#151515] z-20">
         <div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white border-[3px] border-white/90">
-          {/* SVG */}
           <svg
             width="25"
             height="25"
@@ -81,8 +190,7 @@ export default function Section3() {
         </div>
       </div>
       <div className="flex flex-row-reverse gap-2 absolute top-5 left-1/2 translate-x-1/2 font-medium text-[16px] text-[#151515] z-20">
-        <div className="w-16 h-16 rounded-2xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[100deg] from-white/50 to-white border-[3px] border-white/90">
-          {/* SVG */}
+        <div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white border-[3px] border-white/90">
           <svg
             width="25"
             height="25"
@@ -109,25 +217,86 @@ export default function Section3() {
         </div>
       </div>
 
-      {/* Context */}
-      <div className="w-full h-full  z-30 absolute inset-0 flex flex-col items-center justify-center p-10">
-        
+      <div className="w-full h-full z-30 absolute inset-0 flex flex-col items-center justify-center p-10">
         <p className="absolute top-15 left-20 text-[16px] font-medium">
-            Basé à Paris, France
-          </p>
-          <p className="absolute top-15 right-20 text-[16px] font-medium">
+          Basé à Paris, France
+        </p>
+        <p className="absolute top-15 right-20 text-[16px] font-medium">
           48.8765° N, 2.3021° E
-          </p>
+        </p>
 
         <Badge text="Nos Expertises B2B" mode="Light" />
         <h6 className="font-bold text-[70px] text-center mt-6 text-[#151515] mb-10 leading-[140%]">
-          Des <span className="text-[#6D785A]">Solutions Complètes</span> Pour <br /> Vos Projets
-          D&apos;envergure
+          Des <span className="text-[#6D785A]">Solutions Complètes</span> Pour{" "}
+          <br /> Vos Projets D&apos;envergure
         </h6>
-        <p className="text-center max-w-125 text-[#5C5C5C]">Nous ne faisons pas du dépannage. Nous construisons des partenariats durables basés sur la capacité, la structure et la fiabilité.</p>
-        <div className="absolute bottom-10">
+        <p className="text-center max-w-125 text-[#5C5C5C]">
+          Nous ne faisons pas du dépannage. Nous construisons des partenariats
+          durables basés sur la capacité, la structure et la fiabilité.
+        </p>
+
+        {/* Slider + arrows */}
+        <div className="w-full flex items-center justify-center gap-4 mt-10 px-4">
+          {/* Left arrows */}
+          <div className="flex flex-col gap-2 shrink-0 z-10">
+            <button
+              type="button"
+              onClick={goNext}
+              className="w-12 h-10 rounded-l-full rounded-r-md bg-[#2a2a2a] text-white flex items-center justify-center shadow-md hover:bg-[#1a1a1a] transition-colors"
+              aria-label="Suivant"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="w-12 h-10 rounded-l-full rounded-r-md bg-[#6D785A] text-white flex items-center justify-center shadow-md hover:bg-[#5c6a4d] transition-colors"
+              aria-label="Précédent"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+
+          <div className="w-full max-w-[calc(389px*3+56px*2+4rem)] overflow-hidden mx-2">
+            <div
+              className="flex flex-row gap-14 transition-[transform] duration-300 ease-out"
+              style={{
+                width: CARDS.length * CARD_WIDTH + (CARDS.length - 1) * CARD_GAP,
+                transform: `translateX(${translateX}px)`,
+              }}
+            >
+              {CARDS.map((card, i) => (
+                <Card
+                  key={i}
+                  {...card}
+                  isActive={i === currentIndex}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right arrows */}
+          <div className="flex flex-col gap-2 shrink-0 z-10">
+            <button
+              type="button"
+              onClick={goNext}
+              className="w-12 h-10 rounded-r-full rounded-l-md bg-[#2a2a2a] text-white flex items-center justify-center shadow-md hover:bg-[#1a1a1a] transition-colors"
+              aria-label="Suivant"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="w-12 h-10 rounded-r-full rounded-l-md bg-[#6D785A] text-white flex items-center justify-center shadow-md hover:bg-[#5c6a4d] transition-colors"
+              aria-label="Précédent"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+        </div>
+
         <BtnComp />
-       </div>
       </div>
     </div>
   );

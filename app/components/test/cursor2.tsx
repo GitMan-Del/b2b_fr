@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Badge from "./Badge";
+import Badge from "../Badge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,34 +72,34 @@ export default function CustomCursorContainer() {
   }, []);
 
   /* =========================
-     SCROLL / PIN / HORIZONTAL
+     SCROLL / PIN / HORIZONTAL (al doilea bloc – prioritate mai mică ca să nu se suprapună cu primul)
   ========================= */
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current) return;
 
+    const section = sectionRef.current;
+    const track = trackRef.current;
     const ctx = gsap.context(() => {
-      const track = trackRef.current!;
       const numSlides = track.children.length;
+      const scrollDistance = () => track.scrollWidth - window.innerWidth;
 
       gsap.to(track, {
-        x: () => -(track.scrollWidth - window.innerWidth), // Calcul corect în px
+        x: () => -scrollDistance(),
         ease: "none",
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: section,
           start: "top top",
-          end: () => `+=${track.scrollWidth - window.innerWidth}`,
-          scrub: true,
+          end: () => `+=${scrollDistance()}`,
+          scrub: 1.2,
           pin: true,
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          refreshPriority: -1,
-          // markers: true, // Activează temporar pentru debug vizual
-          snap: 1 / (numSlides + 1), // Snap simplu
-          // onUpdate: (self) => console.log("Progres:", self.progress), // Debug temporar
+          refreshPriority: 1,
+          snap: { snapTo: 1 / (numSlides - 1), duration: 0.35, ease: "power2.inOut" },
         },
       });
-    }, sectionRef);
+    }, section);
 
     return () => ctx.revert();
   }, []);
@@ -123,10 +123,10 @@ export default function CustomCursorContainer() {
       </div>
 
       {/* Horizontal Section */}
-      <section ref={sectionRef} className="relative h-screen w-[300vw] z-10">
+      <section ref={sectionRef} className="relative h-screen w-[400vw] z-10">
         <div ref={trackRef} className="flex h-full overflow-hidden w-[400vw]">
           {/* Slide 1 */}
-          <div className="relative w-screen h-full flex items-start justify-end flex-col p-20 ">
+          <div className="relative w-screen shrink-0 h-full flex items-start justify-end flex-col p-20 ">
             <Image
               src="/FFL.png"
               alt=""
@@ -145,8 +145,8 @@ export default function CustomCursorContainer() {
               Syndics & Gestionnaires
             </h3>
           </div>
-          {/* Slide 1 */}
-          <div className="relative w-screen h-full flex items-start justify-end flex-col p-20 ">
+          {/* Slide 2 */}
+          <div className="relative w-screen shrink-0 h-full flex items-start justify-end flex-col p-20 ">
             <Image
               src="/VGH.png"
               alt=""
@@ -166,8 +166,8 @@ export default function CustomCursorContainer() {
             </h3>
           </div>
 
-          {/* Slide 2 */}
-          <div className="relative w-screen h-full flex flex-col items-start justify-end p-20">
+          {/* Slide 3 */}
+          <div className="relative w-screen shrink-0 h-full flex flex-col items-start justify-end p-20">
             <Image
               src="/HJG.png"
               alt="a"
@@ -187,8 +187,8 @@ export default function CustomCursorContainer() {
             </h3>
           </div>
 
-          {/* Slide 3 */}
-          <div className="relative w-screen h-full flex items-start justify-end flex-col p-20">
+          {/* Slide 4 */}
+          <div className="relative w-screen shrink-0 h-full flex items-start justify-end flex-col p-20">
             <Image
               src="/PEX.png"
               alt=""

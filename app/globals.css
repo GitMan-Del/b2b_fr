@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+
+
+
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+
+
+
+
 :root {
   --background: #ffffff;
     --foreground: #171717;
@@ -17,4 +28,25 @@ h1 , h2  {
 
 p , li , ul , a , button {
   font-family: var(--font-p);
+}
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(150%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1.2s ease-in-out infinite;
+}
+
+.path-s3 {
+/* clip-path: polygon(0% 18.99%, 3.54% 14.79%, 13.44% 3.03%, 20.83% 0%, 100% 0%, 100% 99.5%, 0% 100%); */
+clip-path: path("M374.559 441.595L40.5513 441.595C25.3541 441.595 13.0343 429.275 13.0343 414.078V82.2294C13.0343 75.0173 15.8658 68.0935 20.9193 62.9481L61.8536 21.2696C67.0276 16.0016 74.1017 13.034 81.4855 13.034H374.559C389.757 13.034 402.076 25.3537 402.076 40.5509V414.078C402.076 429.275 389.757 441.595 374.559 441.595Z");  
 }
