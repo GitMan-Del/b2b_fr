@@ -20,7 +20,7 @@ export default function Steps() {
 
       <VerticalLines variant="Var2" />
       {/* Butonul – jos pe mobil, poziția ta absolută pe desktop */}
-      <div className="relative z-30 mt-12 md:mt-0 md:absolute md:bottom-10 md:left-1/2 md:-translate-x-1/2 w-full flex justify-center md:justify-start px-4 md:px-0">
+      <div className="z-30 mt-12 md:mt-0 absolute bottom-10 left-1/2 -translate-x-1/2 w-full flex justify-center px-4 md:px-0">
         <BtnComp text="Voir tous les étapes" />
       </div>
     </div>
