@@ -5,28 +5,25 @@ import BtnComp from "./btn";
 
 export default function RequestQuoteForm() {
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center z-30">
-      <div className="max-w-3xl w-full overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center py-8 px-2 sm:px-6 lg:px-8 z-30">
+      <div className="w-full max-w-3xl mx-auto bg-white/90 rounded-lg shadow-md overflow-hidden">
         {/* Header */}
-        <div className="px-8 pt-10 pb-6 text-center">
+        <div className="px-3 sm:px-8 pt-8 sm:pt-10 pb-6 text-center">
           <div className="flex justify-center mb-6">
             <Badge mode="Light" text="Prêt à démarrer ?" />
           </div>
-
-          <h1 className="text-4xl md:text-5xl font-bold text-[#1A2010] mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A2010] mb-4 leading-tight">
             Demander <span className="text-[#6D785A]">Un Devis</span>
           </h1>
-
-          <p className="text-lg text-[#5C5C5C] max-w-125 mx-auto leading-relaxed">
-            Que vous soyez syndic, investisseur, foncière ou entreprise, nous
-            sommes là pour transformer vos projets en réalité.
+          <p className="text-base sm:text-lg text-[#5C5C5C] max-w-2xl mx-auto leading-relaxed">
+            Que vous soyez syndic, investisseur, foncière ou entreprise, nous sommes là pour transformer vos projets en réalité.
           </p>
         </div>
 
         {/* Form */}
-        <form className="px-8 pb-10 space-y-7">
+        <form className="px-3 sm:px-8 pb-8 sm:pb-10 space-y-7">
           {/* Nume + Prenume */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <label
                 htmlFor="prenom"
@@ -75,7 +72,7 @@ export default function RequestQuoteForm() {
           </div>
 
           {/* Email + Telefon */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <label
                 htmlFor="email"
@@ -156,8 +153,8 @@ export default function RequestQuoteForm() {
           </div>
 
           {/* Buton */}
-          <div className="pt-4 w-full items-center justify-center flex">
-           <BtnComp text="Envoyer le message" />
+          <div className="pt-4 w-full flex items-center justify-center">
+            <BtnComp text="Envoyer le message" />
           </div>
         </form>
       </div>

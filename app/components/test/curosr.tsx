@@ -15,71 +15,62 @@ export default function CustomCursorContainer() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   /* =========================
-     CUSTOM CURSOR
+     CUSTOM CURSOR – doar pe desktop (nu pe touch)
   ========================= */
   useEffect(() => {
+    if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return; // skip pe mobil/touch
+
     const cursor = cursorRef.current;
-    if (!cursor || !sectionRef.current) return;
+    const section = sectionRef.current;
+    if (!cursor || !section) return;
 
     gsap.set(cursor, { autoAlpha: 0, xPercent: -50, yPercent: -50 });
 
-    let isInsideSection = false;
+    let isInside = false;
 
     const moveCursor = (e: MouseEvent) => {
-      if (!isInsideSection) return; // nu mișcă dacă nu suntem în secțiune
-
+      if (!isInside) return;
       gsap.to(cursor, {
         x: e.clientX,
         y: e.clientY,
         duration: 0.18,
         ease: "power2.out",
-        overwrite: "auto",  
+        overwrite: "auto",
       });
     };
 
-    // Detectăm când mouse-ul intră / iese din secțiune
-    const onEnterSection = () => {
-      isInsideSection = true;
+    const onEnter = () => {
+      isInside = true;
       gsap.to(cursor, { autoAlpha: 1, duration: 0.4 });
     };
 
-    const onLeaveSection = () => {
-      isInsideSection = false;
+    const onLeave = () => {
+      isInside = false;
       gsap.to(cursor, { autoAlpha: 0, duration: 0.3 });
     };
 
-    // Folosim mouseenter/mouseleave pe sectiune (mai precis decât ScrollTrigger pentru hover)
-    sectionRef.current.addEventListener("mouseenter", onEnterSection);
-    sectionRef.current.addEventListener("mouseleave", onLeaveSection);
-
-    // Pentru scroll: dacă scroll-ezi rapid și mouse-ul rămâne în zona veche → fallback cu ScrollTrigger
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top center", // începe când secțiunea intră în viewport
-      end: "bottom center", // se termină când iese complet
-      onEnter: onEnterSection,
-      onEnterBack: onEnterSection,
-      onLeaveBack: onLeaveSection,
-    });
-
+    section.addEventListener("mouseenter", onEnter);
+    section.addEventListener("mouseleave", onLeave);
     window.addEventListener("mousemove", moveCursor);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
-      sectionRef.current?.removeEventListener("mouseenter", onEnterSection);
-      sectionRef.current?.removeEventListener("mouseleave", onLeaveSection);
+      section.removeEventListener("mouseenter", onEnter);
+      section.removeEventListener("mouseleave", onLeave);
     };
   }, []);
 
   /* =========================
-     SCROLL / PIN / HORIZONTAL (primul bloc – prioritate mai mare)
+     Horizontal scroll + pin – DOAR pe desktop
   ========================= */
   useEffect(() => {
-    if (!sectionRef.current || !trackRef.current) return;
+    const mm = gsap.matchMedia();
 
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    const ctx = gsap.context(() => {
+    mm.add("(min-width: 768px)", () => {     // sau 1024px – testează ce ți se potrivește
+      if (!sectionRef.current || !trackRef.current) return;
+
+      const section = sectionRef.current;
+      const track = trackRef.current;
       const numSlides = track.children.length;
       const scrollDistance = () => track.scrollWidth - window.innerWidth;
 
@@ -96,79 +87,128 @@ export default function CustomCursorContainer() {
           anticipatePin: 1,
           invalidateOnRefresh: true,
           refreshPriority: 2,
-          snap: { snapTo: 1 / (numSlides - 1), duration: 0.35, ease: "power2.inOut" },
+          snap: {
+            snapTo: 1 / (numSlides - 1),
+            duration: 0.35,
+            ease: "power2.inOut",
+          },
         },
       });
-    }, section);
 
-    return () => ctx.revert();
+      // Cleanup automat prin matchMedia
+      return () => {
+        // gsap va curăța automat la mm.revert()
+      };
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full cursor-none overflow-hidden pt-20"
+      className="relative w-full overflow-hidden pt-10 md:pt-20"
     >
+      {/* Custom cursor – vizibil doar pe desktop */}
       <div
         ref={cursorRef}
-        className="
-    pointer-events-none fixed top-0 left-0 z-20
-    rounded-[10px] border border-white/30 bg-white/10 backdrop-blur-md
-    px-8 py-4 flex items-center justify-center min-w-45
-  "
+        className={`
+          pointer-events-none fixed top-0 left-0 z-50
+          rounded-[10px] border border-white/30 bg-white/10 backdrop-blur-md
+          px-6 py-3 md:px-8 md:py-4 flex items-center justify-center min-w-[180px] md:min-w-45
+          hidden md:flex   // ← ascuns pe mobil
+        `}
       >
-        <span className="text-lg font-medium text-white whitespace-nowrap">
+        <span className="text-base md:text-lg font-medium text-white whitespace-nowrap">
           Discuter de votre projet
         </span>
       </div>
 
-      {/* Horizontal Section */}
-      <section ref={sectionRef} className="relative h-screen w-[300vw] z-10">
-        <div ref={trackRef} className="flex h-full overflow-hidden w-[300vw]">
+      {/* Secțiunea principală */}
+      <section
+        ref={sectionRef}
+        className={`
+          relative w-full 
+          md:h-screen md:w-[300vw] 
+          z-10
+        `}
+      >
+        <div
+          ref={trackRef}
+          className={`
+            flex flex-col md:flex-row 
+            md:h-full md:w-[300vw] 
+            h-fit w-full
+          `}
+        >
           {/* Slide 1 */}
-          <div className="relative w-screen shrink-0 h-full flex items-start justify-end flex-col p-20 ">
+          <div className="
+            relative w-full md:w-screen 
+            md:shrink-0 h-[70vh] md:h-full 
+            flex items-end justify-end flex-col 
+            p-6 md:p-20 pb-16 md:pb-20
+          ">
             <Image
               src="/RDB.png"
-              alt=""
+              alt="Rénovation de bâtiment"
               fill
               className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
             <Badge mode="Blured" text="Bâtiment" />
-            <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
+            <h3 className="
+              relative z-10 text-5xl sm:text-6xl md:text-[96px] 
+              text-white uppercase font-medium leading-tight
+            ">
               Rénovation de bâtiment
             </h3>
           </div>
 
           {/* Slide 2 */}
-          <div className="relative w-screen shrink-0 h-full flex flex-col items-start justify-end p-20">
+          <div className="
+            relative w-full md:w-screen 
+            md:shrink-0 h-[70vh] md:h-full 
+            flex flex-col items-start justify-end 
+            p-6 md:p-20 pb-16 md:pb-20
+          ">
             <Image
               src="/SEC.png"
-              alt="a"
+              alt="Rénovation de bureau"
               fill
               className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
             <Badge mode="Blured" text="Bureaux professionnels" />
-            <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
+            <h3 className="
+              relative z-10 text-5xl sm:text-6xl md:text-[96px] 
+              text-white uppercase font-medium leading-tight
+            ">
               Rénovation de bureau
             </h3>
           </div>
 
           {/* Slide 3 */}
-          <div className="relative w-screen shrink-0 h-full flex items-start justify-end flex-col p-20">
+          <div className="
+            relative w-full md:w-screen 
+            md:shrink-0 h-[70vh] md:h-full 
+            flex items-end justify-end flex-col 
+            p-6 md:p-20 pb-16 md:pb-20
+          ">
             <Image
               src="/CES.png"
-              alt=""
+              alt="Rénovation de château"
               fill
               className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-black/40" />
             <Badge mode="Blured" text="Château" />
-            <h3 className="relative z-10 text-[96px] text-white uppercase font-medium">
+            <h3 className="
+              relative z-10 text-5xl sm:text-6xl md:text-[96px] 
+              text-white uppercase font-medium leading-tight
+            ">
               Rénovation de château
             </h3>
           </div>

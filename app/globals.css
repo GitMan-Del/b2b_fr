@@ -50,3 +50,27 @@ p , li , ul , a , button {
 /* clip-path: polygon(0% 18.99%, 3.54% 14.79%, 13.44% 3.03%, 20.83% 0%, 100% 0%, 100% 99.5%, 0% 100%); */
 clip-path: path("M374.559 441.595L40.5513 441.595C25.3541 441.595 13.0343 429.275 13.0343 414.078V82.2294C13.0343 75.0173 15.8658 68.0935 20.9193 62.9481L61.8536 21.2696C67.0276 16.0016 74.1017 13.034 81.4855 13.034H374.559C389.757 13.034 402.076 25.3537 402.076 40.5509V414.078C402.076 429.275 389.757 441.595 374.559 441.595Z");  
 }
+
+.path-c3 {
+  /* Taietură în partea de sus dreapta + colțuri rotunjite */
+  position: relative;
+  /* Nu folosim border clasic pentru că e tăiat de clip-path;
+     Adăugăm un border vizibil "și pe tăietură" folosind un ::after */
+  clip-path: path(
+    "M0,16 Q0,0 16,0 H213 Q223,0 228,5 L278,55 Q283,60 283,70 V185 Q283,198 270,198 H16 Q0,198 0,185 Z"
+  );
+  border-radius: 10px; /* Rotunjire suplimentară la nivelul containerului */
+  /* Scoatem border clasic -- îl punem cu ::after pentru a-l vedea peste tot! */
+}
+.path-c3::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  clip-path: path(
+    "M0,16 Q0,0 16,0 H213 Q223,0 228,5 L278,55 Q283,60 283,70 V185 Q283,198 270,198 H16 Q0,198 0,185 Z"
+  );
+  border-radius: 10px;
+  border: 3px solid #cfcfcf1a; /* Adaugă border pe tot conturul, inclusiv peste zona tăiată */
+  box-sizing: border-box;
+}

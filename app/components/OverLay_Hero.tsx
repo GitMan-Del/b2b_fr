@@ -24,9 +24,9 @@ export default function OverlayHero() {
   // TEST_#1
   return (
     <div className="inset-0 absolute flex justify-center items-center z-40">
-      <div className="min-w-fit w-1/2 min-h-fit flex items-start absolute -bottom-9 justify-around z-70">
-        <div className="flex flex-row gap-2">
-          < div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white border-[3px] border-white/90">
+      <div className="min-w-fit md:w-1/2  w-full min-h-fit md:flex items-start md:absolute hidden -bottom-9 justify-around z-70">
+        <div className="flex flex-row items-center gap-2">
+          <div className="w-16 h-16 rounded-xl bg-blur flex items-center justify-center bg-[#687256a2] -bg-linear-[120deg] from-white/50 to-white border-[3px] border-white/90">
             {/* SVG */}
             <svg
               width="25"
@@ -59,7 +59,7 @@ export default function OverlayHero() {
           </div>  
           <div className="w-fit flex flex-col items-start gap-1">
             <p className="text-xl font-extrabold text-[#6D785A]">85%</p>
-            <p className="font-medium">Clients récurrents</p>
+            <p className="font-medium text-xs md:text-normal">Clients récurrents</p>
           </div>  
         </div>
         <div className="flex flex-row-reverse gap-2">
@@ -86,8 +86,8 @@ export default function OverlayHero() {
             </svg>
           </div>
           <div className="w-fit flex flex-col items-end gap-1">
-            <p className="text-xl font-extrabold text-[#6D785A]">98%</p>
-            <p className="font-medium">Respect des délais</p>
+            <p className="md:text-xl font-extrabold text-[#6D785A]">98%</p>
+            <p className="font-medium text-xs md:text-normal">Respect des délais</p>
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default function OverlayHero() {
         viewBox="0 0 1378 670"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="pointer-events-none"
+        className="pointer-events-none md:absolute hidden md:block"
       >
         <mask id="path-1-inside-1_1_823" fill="white">
           <path d="M304.942 0C321.561 0 336.888 8.96388 345.035 23.4482L352.701 37.0762C360.849 51.5605 376.175 60.5244 392.794 60.5244H984.577C1001.2 60.5244 1016.52 51.5605 1024.67 37.0762L1032.34 23.4482C1040.48 8.96388 1055.81 0 1072.43 0H1347.37C1349.18 0 1350.96 0.160841 1352.68 0.46875C1353.17 0.556736 1353.66 0.65684 1354.15 0.768555C1355.6 1.10361 1357.01 1.54387 1358.37 2.08105C1358.83 2.26012 1359.27 2.45012 1359.72 2.65039C1360.38 2.95087 1361.03 3.27465 1361.67 3.62109C1362.1 3.8519 1362.51 4.09235 1362.93 4.34277C1364.99 5.59562 1366.89 7.09041 1368.58 8.78711C1369.77 9.97473 1370.86 11.2614 1371.84 12.6338C1372.39 13.418 1372.91 14.2298 1373.4 15.0674C1373.64 15.4862 1373.87 15.9115 1374.09 16.3428C1376.19 20.4392 1377.37 25.0814 1377.37 30V639.053C1377.37 655.621 1363.94 669.053 1347.37 669.053H1072.43C1055.81 669.053 1040.48 660.089 1032.34 645.604L1024.67 631.977C1016.52 617.492 1001.2 608.528 984.577 608.528H392.794C376.175 608.528 360.849 617.492 352.701 631.977L345.035 645.604C336.888 660.089 321.561 669.053 304.942 669.053H30C24.8223 669.053 19.951 667.741 15.7002 665.432C15.2752 665.201 14.8566 664.959 14.4443 664.709C12.7949 663.707 11.2498 662.55 9.8291 661.259C9.47393 660.936 9.12641 660.605 8.78711 660.266C6.07252 657.551 3.87554 654.319 2.35742 650.729C2.16767 650.281 1.98854 649.827 1.82031 649.367C1.23156 647.759 0.776627 646.087 0.46875 644.363C0.380735 643.871 0.304857 643.374 0.241211 642.873C0.0821907 641.622 1.79757e-05 640.347 0 639.053V30C2.78527e-06 29.7411 0.00324519 29.4829 0.00976562 29.2256C0.0228085 28.7109 0.0492325 28.1994 0.0878906 27.6914C0.725634 19.3119 4.80543 11.8945 10.917 6.85059C11.2875 6.54481 11.6657 6.24798 12.0508 5.95996C12.8209 5.384 13.6195 4.84394 14.4443 4.34277C14.8565 4.09235 15.2753 3.8519 15.7002 3.62109C19.951 1.31182 24.8223 0 30 0H304.942Z" />
@@ -113,18 +113,18 @@ export default function OverlayHero() {
           mask="url(#path-1-inside-1_1_823)"
         />
       </svg>
-      <p className="absolute left-1/2 bottom-22 -translate-x-1/2 text-[#6D785A] font-medium z-100 text-[16px]">
+      <p className="md:absolute hidden left-1/2 bottom-22 -translate-x-1/2 text-[#6D785A] font-medium z-100 text-[16px]">
         SCROLL DOWN
       </p>
 
-      <div className="w-[95%] absolute h-[90%] flex flex-row z-90">
-        <div className="flex-2  flex flex-col items-start justify-center-safe relative">
-          <p className="absolute bottom-0 left-0 text-[16px] font-medium">
+      <div className="w-[95%] absolute md:h-[90%] flex md:flex-row flex-col z-90 mt-20">
+        <div className="flex-2 flex flex-col items-start justify-center md:justify-center-safe relative">
+          <p className="md:absolute hidden bottom-0 left-0 text-[16px] font-medium">
             Basé à Paris, France
           </p>
 
           <Badge text={"Votre expert B2B"} mode={"Light"} />
-          <h1 className="max-w-245 text-[70px] text-left mt-6 text-[#151515] mb-30 leading-[140%]">
+          <h1 className="md:max-w-245  md:text-[70px] text-left mt-6 text-[#151515] md:mb-30 mb-0 md:leading-[140%] text-[35px] font-bold">
             <span className="muted">Votre Partenaire </span>
             <span className="text-[#6D785A] w-41.75 h-17.5 bg-[#D9D9D9]/30 border border-[#DEDEDE] -py-1 px-2 rounded-[10px]">
               B2B 
@@ -132,7 +132,7 @@ export default function OverlayHero() {
             Pour des Projets
           </h1>
         </div>
-        <div className="flex-1 relative flex justify-center flex-col items-start p-10 text-left mt-20 text-[##5C5C5C]">
+        <div className="flex-1 relative flex justify-center flex-col items-start md:p-10 text-left md:mt-20 text-[##5C5C5C]">
           <p className="text-lg text-[##1C1C1C]">{"// SINCE - 2025 //"}</p>
           <p className="mt-5.5 text-xl font-medium max-w-109 text-[#5C5C5C]">
             Nous réalisons des rénovations complètes, aménagements
@@ -140,7 +140,7 @@ export default function OverlayHero() {
             investisseurs et entreprises à Paris.
           </p>
           <Btncomp text="Discuter de votre project" />
-          <p className="absolute bottom-0 right-0 font-medium text-[16px] text-[#151515]">
+          <p className="md:absolute hidden bottom-0 right-0 font-medium text-[16px] text-[#151515]">
             48.8765° N, 2.3021° E
           </p>
         </div>

@@ -1,7 +1,7 @@
 
 export default function Navbar() {
   return (
-    <div className="w-full h-16  absolute top-4  right-1/2 translate-x-1/2 z-100">
+    <div className="w-full h-16 absolute top-4  right-1/2 translate-x-1/2 z-100">
       <div className="max-w-175 mx-auto h-full flex items-center justify-center">
         {/* <ul className="uppercase flex flex-row gap-10">
           <li className="text-(--foreground)">
